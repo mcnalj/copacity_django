@@ -1,1 +1,1 @@
-web: gunicorn copacity_app.wsgi --log-file -
+web: gunicorn copacity.wsgi --log-file -
