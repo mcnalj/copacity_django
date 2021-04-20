@@ -1,0 +1,30 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+  <div>
+    </br>
+    </br>
+    </br>
+    <h1>Check-Ins</h1>
+    <p class="lead">Here are the recent Check-Ins </p>
+    <ul>
+      {% for checkIn in checkIns %}
+        <p>Check in: {{ checkIn.id}}</p>
+        <p>{{ checkIn.yourName}} checked in on {{checkIn.dateTime}} </p>
+        <p> Hard Today: {{ checkIn.hardToday }}</p>
+        <p> Good Today: {{ checkIn.goodToday }}</p>
+        <p> Excited Today: {{ checkIn.excitedToday }}</p>
+        <p> Safe Thoughts: {{ checkIn.thoughts}} &nbsp &nbsp &nbsp Explanation: {{ checkIn.thoughtsExplained }}</p>
+        <p> Safe Actions: {{ checkIn.actions}} &nbsp &nbsp &nbsp Explanation: {{ checkIn.actionsExplained }}</p>
+        <p> Mood: {{ checkIn.moodRange }} &nbsp &nbsp &nbsp Pinta Picture: {{ checkIn.pintaRange }}</p>
+        <p> Urgency: {{ checkIn.urgency}}</p>
+        </br>
+        </br>
+      {% empty %}
+        <li>No one has checked in.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,133 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+<!-- This html page is currently dead code, but maybe a nice reference for the Bootstrap -->
+    <form>
+      <div class="form-group row mb-0">
+        <label for="yourName" class="col-sm-4 col-form-label">Your name:</label>
+        <select class="col-sm-8 form-select" id="yourName">
+          <option value=1>Jake<option>
+          <option value=2>Leah<option>
+          <option value=3>Raizel<option>
+          <option value=4>Oscar<option>
+        </select>
+      </div>
+      <div class="form-group row">
+        <label for="hardToday" class="col-sm-4 col-form-label">One hard thing about today:</label>
+        <input type="text" class="col-sm-8 form-control" id="hardToday" aria-describedby="hardToday">
+        <label for="goodToday" class="col-sm-4 col-form-label">One good thing about today:</label>
+        <input type="text" class="col-sm-8 form-control" id="goodToday" aria-describedby="goodToday">
+        <label for="excitedToday" class="col-sm-4 col-form-label">One thing I am excited about today:</label>
+        <input type="text" class="col-sm-8 form-control" id="excitedToday" aria-describedby="excitedToday">
+      </div>
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-4">I am safe in my thoughts today:</legend>
+          <div class="col-sm-8">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="thoughtsYes" id="thoughtsYes">
+              <label class="form-check-label" for="thoughtsYes">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="thoughtsNo" id="thoughtsNo">
+              <label class="form-check-label" for="thoughtsNo">
+                No
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="thoughtsMaybe" id="thoughtsMaybe">
+              <label class="form-check-label" for="thoughtsMaybe">
+                Maybe
+              </label>
+            </div>
+            <input type="text" class="form-control" id="thoughtsExplained" placeholder="optional explanation" aria-describedby="thoughtsExplained">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-4">I am safe in my actions today:</legend>
+          <div class="col-sm-8">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="actionsYes" id="actionsYes">
+              <label class="form-check-label" for="actionsYes">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="actionsNo" id="actionsNo">
+              <label class="form-check-label" for="actionsNo">
+                No
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="actionsMaybe" id="actionsMaybe">
+              <label class="form-check-label" for="actionsMaybe">
+                Maybe
+              </label>
+            </div>
+            <input type="text" class="form-control" id="actionsExplained" placeholder="optional explanation" aria-describedby="actionsExplained">
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="row mb-3">
+        <div id="moodRangeHelpText" class="col-sm-4 col-form-label">
+          On a scale from 1 to 10, today I feel:
+        </div>
+        <label for="moodRange" class="col-sm-2 col-form-label">very low and sad</label>
+        <input type="range" class="col-sm-4 form-range" min="1" max="10" value="5" id="moodRange">
+        <label for="moodRange" class="col-sm-2 col-form-label">very happy</label>
+      </div>
+      <div class="row mb-3">
+        <div id="pintaRangeHelpText" class="col-sm-4 col-form-text">
+          I need a Pinta picutre:
+        </div>
+        <label for="pintaRange" class="col-sm-2 col-form-label">Immediately!</label>
+        <input type="range" class="col-sm-4 form-range" min="1" max="10" value="5" id="pintaRange">
+        <label for="pintaRange" class="col-sm-2 col-form-label">I am doing ok, I don't need a picture of Pinta (or she is sitting right next to me)</label>
+      </div>
+      <fieldset class=form-group>
+        <div class="row">
+          <legend class="col-form-label col-sm-4">I want to connect about this response:</legend>
+          <div class="col-sm-8">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="callNow" id="callNow">
+              <label class="form-check-label" for="callNow">
+                Call now
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="textNow" id="textNow">
+              <label class="form-check-label" for="textNow">
+                Text now
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="talkLater" id="talkLater">
+              <label class="form-check-label" for="talkLater">
+                Let's talk later
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="notNeccesary" id="notNecessary">
+              <label class="form-check-label" for="notNecessary">
+                Not necessary to talk about it.
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="dontWantTo" id="noTalk">
+              <label class="form-check-label" for="noTalk">
+                I prefer not to talk about it.
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <button type="button" class="btn-block btn-primary">SUBMIT</button>
+    </form>
+
+{% endblock content %}

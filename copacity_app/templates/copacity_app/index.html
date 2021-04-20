@@ -1,0 +1,21 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+    <div class="starter-template">
+      <h1>Co-pacity</h1>
+      <p class="lead">Coping together</p>
+    </div>
+    <a href="{% url 'copacity_app:new_checkIn' %}"><button type="button" class="btn btn-primary btn-lg">Check In</button><a/>
+    <a href="{% url 'copacity_app:checkIns' 0 %}"><button type="button" class="btn btn-primary btn-lg">View Recent Checkins</button></a>
+    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      View recent checkins for . . .
+    </button>
+    <div class="dropdown-menu btn-lg">
+      <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 1 %}">Jake</a>
+      <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 2 %}">Leah</a>
+      <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 3 %}">Raizel</a>
+      <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 4 %}">Oscar</a>
+    </div>
+
+{% endblock content %}
