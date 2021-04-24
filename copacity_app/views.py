@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 from .models import Response
 from .models import CheckIn
@@ -8,12 +10,27 @@ def index(request):
     """The home page for copacity."""
     return render(request, 'copacity_app/index.html')
 
+@login_required
 def checkIns(request, nameId):
     """The page to view all checkIns."""
+    print("name:")
+    print(nameId)
+    print("user:")
+    print(request.user.id)
     if nameId == 0:
-        results = CheckIn.objects.order_by('-dateTime')
+        if request.user.id == 1:
+            results = CheckIn.objects.order_by('-dateTime')
+        else:
+            print("in the else")
+            print(request.user)
+            results = CheckIn.objects.filter(owner=request.user).order_by('-dateTime')
     else:
-        results = CheckIn.objects.filter(yourName=nameId).order_by('-dateTime')
+        if request.user.username == 'mcnalj':
+            results = CheckIn.objects.filter(yourName=nameId).order_by('-dateTime')
+            print("in the mcnalj else")
+            print(nameId)
+        else:
+            results = CheckIn.objects.filter(owner=request.user).order_by('-dateTime')
     top = len(results)
     if top > 5:
         top = 5
@@ -31,11 +48,11 @@ def checkIns(request, nameId):
 
             if result.yourName == 1:
                 yourName = "Jake"
-            elif result.yourName == 2:
-                yourName = "Leah"
             elif result.yourName == 3:
-                yourName = "Raizel"
+                yourName = "Leah"
             elif result.yourName == 4:
+                yourName = "Raizel"
+            elif result.yourName == 5:
                 yourName = "Oscar"
 
             if result.thoughts == 1:
@@ -82,6 +99,7 @@ def checkIns(request, nameId):
     context = {'checkIns': checkIns}
     return render(request, 'copacity_app/checkIns.html', context)
 
+@login_required
 def  new_checkIn(request):
     """Add a new checkIn"""
     if request.method != 'POST':
@@ -92,8 +110,14 @@ def  new_checkIn(request):
         form = CheckInForm(data=request.POST)
         print(form.errors)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.yourName = request.user.id
+            instance.owner = request.user
+            instance.save()
             return redirect('copacity_app:index')
+        else:
+            print("Save failed")
+            print(request.user.id)
 
     # Display a blank or invalid form.
     context = {'form': form}

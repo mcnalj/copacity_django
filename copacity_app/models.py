@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Response(models.Model):
     """A response to the daily check-in. This can be deleted."""
@@ -19,7 +20,7 @@ class Response(models.Model):
 
 class CheckIn(models.Model):
     """A daily checkIn"""
-    PEOPLE = [(1, 'Jake'), (2, 'Leah'), (3, 'Raizel'), (4, 'Oscar')]
+    PEOPLE = [(1, 'Jake'), (3, 'Leah'), (4, 'Raizel'), (5, 'Oscar')]
     SAFE = [(1, 'Yes'), (2, 'No'), (3, 'Maybe')]
     URGENCY = [(1, 'Call now'), (2, 'Text now'), (3, 'Talk later'), (4, 'Not necessary to talk about it'), (5, 'I Prefer not to talk about it')]
     dateTime = models.DateTimeField(auto_now_add=True)
@@ -34,6 +35,7 @@ class CheckIn(models.Model):
     moodRange = models.IntegerField(blank=False, default=5)
     pintaRange = models.IntegerField(blank=False, default=5)
     urgency = models.IntegerField(default=4, choices=URGENCY)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """Return a string representation of the model."""
