@@ -20,7 +20,7 @@ class Response(models.Model):
 
 class CheckIn(models.Model):
     """A daily checkIn"""
-    PEOPLE = [(1, 'Jake'), (3, 'Leah'), (4, 'Raizel'), (5, 'Oscar')]
+    PEOPLE = [(1, 'Jake'), (2, 'Leah'), (3, 'Raizel'), (4, 'Oscar')]
     SAFE = [(1, 'Yes'), (2, 'No'), (3, 'Maybe')]
     URGENCY = [(1, 'Call now'), (2, 'Text now'), (3, 'Talk later'), (4, 'Not necessary to talk about it'), (5, 'I Prefer not to talk about it')]
     dateTime = models.DateTimeField(auto_now_add=True)

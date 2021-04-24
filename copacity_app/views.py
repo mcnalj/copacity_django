@@ -48,11 +48,11 @@ def checkIns(request, nameId):
 
             if result.yourName == 1:
                 yourName = "Jake"
-            elif result.yourName == 3:
+            elif result.yourName == 2:
                 yourName = "Leah"
-            elif result.yourName == 4:
+            elif result.yourName == 3:
                 yourName = "Raizel"
-            elif result.yourName == 5:
+            elif result.yourName == 4:
                 yourName = "Oscar"
 
             if result.thoughts == 1:
