@@ -1,0 +1,42 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+    </br>
+    </br>
+    </br>
+    <h1>Your Circles</h1>
+    <p class="lead">Edit your circles. </p>
+    <form action="{% url 'copacity_app:update_circle' %}" formnovalidate method='POST' >
+      {% csrf_token %}
+      <input type="submit" class="btn-block btn-primary" value="SUBMIT" formnovalidate>
+      <input type="submit" class="btn-block btn-primary" value="CANCEL" formaction="{% url 'copacity_app:index' %}" formnovalidate>
+      </br>
+      </br>
+      <div class="form-group row">
+        {{ form.id}}
+      </div>
+      <div class="form-group row">
+        {{form.name}}
+      </div>
+      <div class="form-group row">
+        {{ form.adminId}}
+      </div>
+      <div class="form-group row">
+        {{form.createdBy}}
+      </div>
+      <div class="form-group row">
+        {{circleInstance.createdOn|date:"m/d/Y H:i:s"}}
+      </div>
+      <div class="form-group row">
+        <label for="members" class="col-sm-4 col-form-label">Edit members:</label>
+      </div>
+      <div class="form-group row">
+        {{ form.members }}
+      </div>
+
+
+
+
+      </form>
+
+{% endblock content %}

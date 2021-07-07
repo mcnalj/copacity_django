@@ -1,0 +1,23 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+  <div>
+    </br>
+    </br>
+    </br>
+    <h1>Circles</h1>
+    <p class="lead">Here are the circles you belong to. </p>
+    <ul>
+      {% for circle in circles %}
+        <p>Id: {{ circle.circleId}}</p>
+        <p>Circle: {{ circle.name}}</p>
+        </br>
+        </br>
+      {% empty %}
+        <li>You do not belong to any circles.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock content %}

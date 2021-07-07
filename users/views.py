@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeDoneView
 
 def register(request):
     """Register a new user."""
@@ -19,3 +21,20 @@ def register(request):
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
+def profile(request):
+    """Update a users profile."""
+    if request.method != 'POST':
+        # Display profile update from.
+        form = PasswordChangeForm(request.user)
+    else:
+        form = PasswordChangeForm(request.user)
+
+        if form.is_valid():
+            print("valid")
+            updated_user = form.save()
+            login(request, updated_user)
+            return redirect('copacity_app:index')
+    # Display a blank or invalid form.
+    context = {'form': form}
+    return render(request, 'registration/profile.html', context)

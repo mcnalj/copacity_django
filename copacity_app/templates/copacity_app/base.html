@@ -21,30 +21,32 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'copacity_app:new_checkIn' %}">CheckIn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'copacity_app:checkIns' 0 %}">Recent</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">People</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 1 %}">Jake</a>
-            <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 2 %}">Leah</a>
-            <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 3 %}">Raizel</a>
-            <a class="dropdown-item" href="{% url 'copacity_app:checkIns' 4 %}">Oscar</a>
-          </div>
-        </li>
-
         {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="#">Hello, {{ user.username }}</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'copacity_app:new_checkIn' %}">Check-In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'copacity_app:yourCheckIns' %}">Your Check-Ins</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'copacity_app:yourCircles' %}">Your Circles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'copacity_app:createCircle' %}">Create a Circle</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'copacity_app:manage_circles' %}">Manage Circles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:password_change' %}">Change Password</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
           </li>
+
         {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'users:register' %}">Register</a>
@@ -53,7 +55,6 @@
             <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
           </li>
         {% endif %}
-      </li>
       </ul>
     </div>
   </nav>

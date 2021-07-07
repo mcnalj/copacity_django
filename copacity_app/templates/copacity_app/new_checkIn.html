@@ -6,6 +6,7 @@
     {% csrf_token %}
       <div class="form-group row mb-0">
         <div class="form-group row mb-0">
+        <h1>Check-In</h1>
           <p class="col-sm-12">Hi <strong>{{user.username}}</strong>, thanks for checking in!</p>
         </div>
       </div>
@@ -66,13 +67,17 @@
             {% for radio in form.urgency %}
               <div class="myRadio">
                 {{ radio}}
+              </div>
             {% endfor %}
-
-            </div>
           </div>
         </div>
       </fieldset>
-      <input type="submit" class="btn-block btn-primary" value="SUBMIT">
+      <div class="row mb-3">
+        <label for="visibiility" class="col-sm-3 col-form-label">Visible to circle:</label>
+        {{ form.visibility }}
+      </div>
+      <input type="submit" class="btn-block btn-primary" value="SUBMIT CHECKIN">
+      <input type="submit" class="btn-block btn-primary" value="CANCEL" formaction="{% url 'copacity_app:index' %}" formnovalidate>
     </form>
 
 {% endblock content %}

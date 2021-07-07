@@ -1,0 +1,37 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+  <div>
+    <a class="btn btn-primary" href="{% url 'copacity_app:index' %}" role="button">HOME</a>
+    <a class="btn btn-primary" href="{% url 'copacity_app:new_checkIn' %}" role="button">CHECK-IN<a/>
+    </br>
+    </br>
+    </br>
+    </br>
+    <h1>Your Circles</h1>
+    <p class="lead">Hi, {{user.username}}: </p>
+    <div class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="circle_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View Checkins for Circle:</a>
+      <div class="dropdown-menu" aria-labelledby="dropdown01">
+        {% for circle in circles %}
+        <a class="dropdown-item" href="/circles_checkins_view/{{circle.circleId}}">{{circle.name}}</a>
+        {% empty %}
+        <a class="dropdown-item" href="#">None</a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="circle_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View Details for Circle:</a>
+      <div class="dropdown-menu" aria-labelledby="dropdown01">
+        {% for circle in circles %}
+        <a class="dropdown-item" href="/circle_details/{{circle.circleId}}">{{circle.name}}</a>
+        {% empty %}
+        <a class="dropdown-item" href="#">None</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}

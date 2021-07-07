@@ -1,0 +1,27 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+  <div>
+    <a class="btn btn-primary" href="{% url 'copacity_app:yourCircles' %}" role="button">BACK TO YOUR CIRCLES</a>
+    <a class="btn btn-primary" href="{% url 'copacity_app:new_checkIn' %}" role="button">CHECK-IN<a/>
+    </br>
+    <h1>Circle Details</h1>
+
+    <div>
+        <p><strong>Circle name: {{ circle.name}}</strong></p>
+        <p>Administered by: {{ circle.adminId}} </p>
+        <p>Created by: {{ circle.createdBy}} on {{ circle.createdOn}} </p>
+        <p>Members:</p>
+        <ol>
+        {% for member in people %}
+          <li>{{member}}</li>
+        {% empty %}
+          <li>no members</li>
+        {% endfor %}
+        </ol>
+        &nbsp
+    </div>
+  </div>
+
+{% endblock content %}

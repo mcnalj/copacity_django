@@ -1,0 +1,34 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+  <div>
+    </br>
+    </br>
+    </br>
+    <h1>Check-Ins</h1>
+    <p class="lead">Here are the recent Check-Ins for the circle: {{circleName}} </p>
+    <ul>
+      {% for circle in circles %}
+        <p>Check in: {{ circle.id}}</p>
+        <p>{{ circle.yourName}} checked in on {{circle.dateTime}} </p>
+        <p> Hard Today: {{ circle.hardToday }}</p>
+        <p> Good Today: {{ circle.goodToday }}</p>
+        <p> Excited Today: {{ circle.excitedToday }}</p>
+        <p> Safe Thoughts: {{ circle.thoughts}} &nbsp &nbsp &nbsp Explanation: {{ circle.thoughtsExplained }}</p>
+        <p> Safe Actions: {{ circle.actions}} &nbsp &nbsp &nbsp Explanation: {{ circle.actionsExplained }}</p>
+        <p> Mood: {{ circle.moodRange }} &nbsp &nbsp &nbsp Pinta Picture: {{ circle.pintaRange }}</p>
+        <p> Urgency: {{ circle.urgency}}</p>
+        </br>
+        </br>
+      {% empty %}
+        <li>There are no check-ins for this circle.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <form action="{% url 'copacity_app:manage_circles' %}" method='GET'>
+    {% csrf_token %}
+    <input type="submit" class="btn-block btn-primary" value="BACK TO ADMIN CIRCLES">
+  </form>
+{% endblock content %}
