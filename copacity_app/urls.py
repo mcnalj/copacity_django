@@ -40,4 +40,9 @@ urlpatterns = [
   path('save_editted_circles/', views.save_editted_circles, name = 'save_editted_circles'),
   # Page to practice the updating a circle.
   path('update_circle/', views.update_circle, name = 'update_circle'),
+  # Page to fill in the parameters to request a check-in.
+  path('request_checkin/', views.request_checkin, name = 'request_checkin'),
+  # Logic to send a SMS to request a check-in.
+  path('send_checkin_request/', views.send_checkin_request, name = 'send_checkin_request'),
+
 ]

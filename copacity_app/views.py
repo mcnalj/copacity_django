@@ -14,7 +14,12 @@ from .forms import ManageCirclesForm
 from .forms import EditCircleForm
 from .forms import SaveCircleForm
 from .forms import UpdateCircleForm
-from .forms import UpdateCircleSave
+from .forms import CheckInRequestForm
+from .forms import CheckInSendRequestForm
+
+from twilio.rest import Client
+
+from .credentials import Credentials
 
 import datetime
 
@@ -187,7 +192,52 @@ def update_circle(request):
     return render(request, 'copacity_app/update_circle.html', context)
 
 
+@login_required
+def request_checkin(request):
+    """Page to send an SMS to request a checkin."""
+    if request.method != 'POST':
+        print("Requesting GET check-in!")
+    else:
+        print("Requesting POST check-in!")
+        form = ManageCirclesForm(request.user, data=request.POST)
+        print(form) # for some reason if we don't have this, form has no cleaned_data?
+        if form.is_valid:
+            circleId = form.cleaned_data['circlesToAdmin']
+            form = CheckInRequestForm(circleId)
+            context = {'form':form}
+            return render(request, 'copacity_app/request_checkin.html', context)
+        else:
+            print("Invalid form, need error handling.")
+    return redirect('copacity_app:index')
 
+@login_required
+def send_checkin_request(request):
+    if request.method != 'POST':
+        print("We have and error.")
+    else:
+        print("In the send post . .. .")
+        account_sid = Credentials.account_sid
+        auth_token = Credentials.auth_token
+        form = CheckInSendRequestForm(data=request.POST)
+        if form.is_valid():
+            circle_name = form.cleaned_data["circle_name"]
+            member_name = form.cleaned_data["name"]
+            phoneNumber = form.cleaned_data["phoneNumber"]
+            phoneNumber = '+1' + str(phoneNumber)
+            print(phoneNumber)
+            client = Client(account_sid, auth_token)
+            content = "Hi " + member_name + ", " + request.user.username + " wants you to check in to " + circle_name + " at https://co-pacity.herokuapp.com/."
+            print(content)
+            message = client.messages.create(
+                from_='+12056354461',
+                body = content,
+                to = phoneNumber
+            )
+            print("Request Sent!")
+        else:
+            print("Form not valid")
+            print(form.errors)
+    return redirect('copacity_app:index')
 
 
 

@@ -67,6 +67,7 @@ class ManageCirclesForm(forms.Form):
 
     circlesToAdmin = forms.ChoiceField(choices=[])
 
+
 # Are we using this?
 class EditCircleForm(forms.Form):
     def __init__(self, circleId, *args, **kwargs):
@@ -128,6 +129,24 @@ class UpdateCircleSave(forms.Form):
     createdOn = forms.DateTimeField(label="Created On:", required=False, widget=forms.DateTimeInput(attrs={'class': 'col-sm-8 form-control', 'readonly': 'true'}))
     members = forms.members = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}), required=False)
 
+
+class CheckInRequestForm(forms.Form):
+    """Form to get information to pass to Twilio."""
+    def __init__(self, circleId, *args, **kwargs):
+        self.circleId = circleId
+        super(CheckInRequestForm, self).__init__(*args, **kwargs)
+        circle = Circle.objects.get(id=self.circleId)
+        self.fields["circle_name"].initial = circle.name
+
+    circle_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'col-sm-8 form-control', 'readonly': 'true'}), required=False)
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'col-sm-8 form-control'}))
+    phoneNumber = forms.CharField(label="Enter a phone number:", widget=forms.TextInput(attrs={'class':'col-sm-8 form-control', 'type': 'tel', 'pattern':'[0-9]{10}', 'placeholder': '2076535555'}))
+
+class CheckInSendRequestForm(forms.Form):
+    """Form to process information to pass to Twilio."""
+    circle_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'col-sm-8 form-control', 'readonly': 'true'}), required=False)
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'type here'}))
+    phoneNumber = forms.CharField(label="Enter a phone number:", widget=forms.TextInput(attrs={'class':'col-sm-8 form-control', 'type': 'tel', 'pattern':'[0-9]{3}-[0-9]{3}-[0-9]{4}'}))
 
 
 # I Do not think we are using anything below here. But I'm not sure about that.
