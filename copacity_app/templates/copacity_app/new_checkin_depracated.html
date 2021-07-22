@@ -1,0 +1,83 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+  <form action="{% url 'copacity_app:new_checkIn' %}" method='POST'>
+    {% csrf_token %}
+      <div class="form-group row mb-0">
+        <div class="form-group row mb-0">
+        <h1>Check-In</h1>
+          <p class="col-sm-12">Hi <strong>{{user.username}}</strong>, thanks for checking in!</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="hardToday" class="col-sm-4 col-form-label">One hard thing about today:</label>
+        {{ form.hardToday }}
+        <label for="goodToday" class="col-sm-4 col-form-label">One good thing about today:</label>
+        {{ form.goodToday }}
+        <label for="excitedToday" class="col-sm-4 col-form-label">One thing I am excited about today:</label>
+        {{ form.excitedToday }}
+      </div>
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-4">I am safe in my thoughts today:</legend>
+          <div class="col-sm-8">
+            {% for radio in form.thoughts %}
+              <div class="myRadio">
+                {{ radio}}
+            {% endfor %}
+            {{form.thoughtsExplained}}
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-4">I am safe in my actions today:</legend>
+          <div class="col-sm-8">
+            {% for radio in form.actions %}
+              <div class="myRadio">
+                {{ radio}}
+            {% endfor %}
+            {{form.actionsExplained}}
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="row mb-3">
+        <div id="moodRangeHelpText" class="col-sm-4 col-form-label">
+          On a scale from 1 to 10, today I feel:
+        </div>
+        <label for="moodRange" class="col-sm-2 col-form-label">very low and sad</label>
+        {{ form.moodRange}}
+        <label for="moodRange" class="col-sm-2 col-form-label">very happy</label>
+      </div>
+      <div class="row mb-3">
+        <div id="pintaRangeHelpText" class="col-sm-4 col-form-text">
+          I need a Pinta picutre:
+        </div>
+        <label for="pintaRange" class="col-sm-2 col-form-label">Immediately!</label>
+        {{ form.pintaRange }}
+        <label for="pintaRange" class="col-sm-2 col-form-label">I am doing ok, I don't need a picture of Pinta (or she is sitting right next to me)</label>
+      </div>
+      <fieldset class=form-group>
+        <div class="row">
+          <legend class="col-form-label col-sm-4">I want to connect about this response:</legend>
+          <div class="col-sm-8">
+            {% for radio in form.urgency %}
+              <div class="myRadio">
+                {{ radio}}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </fieldset>
+      <div class="row mb-3">
+        <label for="visibiility" class="col-sm-3 col-form-label">Visible to circle:</label>
+        {{ form.visibility }}
+      </div>
+      <input type="submit" class="btn-block btn-primary" value="SUBMIT CHECKIN">
+      <input type="submit" class="btn-block btn-primary" value="CANCEL" formaction="{% url 'copacity_app:index' %}" formnovalidate>
+    </form>
+
+{% endblock content %}

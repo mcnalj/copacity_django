@@ -1,0 +1,30 @@
+{% extends "copacity_app/base.html" %}
+
+{% block content %}
+
+  <div>
+    </br>
+    <a class="btn btn-primary" href="/" role="button">HOME</a>
+    <a href="{% url 'copacity_app:new_checkIn' %}"><button type="button" class="btn btn-primary">CHECK-IN</button><a/>
+    <h1>Your Check-Ins</h1>
+    <p class="lead">Here are your Check-Ins, {{user.username}}: </p>
+    <ul>
+      {% for circle in circles %}
+        <p>Check in: {{ circle.id}}</p>
+        <p>{{ request.user.username}} checked in on {{circle.dateTime}} </p>
+        <p> Hard Today: {{ circle.hardToday }}</p>
+        <p> Good Today: {{ circle.goodToday }}</p>
+        <p> Excited Today: {{ circle.excitedToday }}</p>
+        <p> Safe Thoughts: {{ circle.thoughts}} &nbsp &nbsp &nbsp Explanation: {{ circle.thoughtsExplained }}</p>
+        <p> Safe Actions: {{ circle.actions}} &nbsp &nbsp &nbsp Explanation: {{ circle.actionsExplained }}</p>
+        <p> Mood: {{ circle.moodRange }} &nbsp &nbsp &nbsp Pinta Picture: {{ circle.pintaRange }}</p>
+        <p> Urgency: {{ circle.urgency}}</p>
+        </br>
+        </br>
+      {% empty %}
+        <li>You checked in.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock content %}

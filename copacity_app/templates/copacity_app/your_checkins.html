@@ -4,27 +4,88 @@
 
   <div>
     </br>
-    <a class="btn btn-primary" href="/" role="button">HOME</a>
-    <a href="{% url 'copacity_app:new_checkIn' %}"><button type="button" class="btn btn-primary">CHECK-IN</button><a/>
+    </br>
+    <div class="row justify-content-center">
+      <a class="btn btn-primary col-sm-5 m-1" href="/" role="button">HOME</a>
+      <a class="btn btn-primary col-sm-5 m-1" href="{% url 'copacity_app:new_checkIn' %}" role="button">CHECK-IN</a>
+    </div>
     <h1>Your Check-Ins</h1>
-    <p class="lead">Here are your Check-Ins, {{user.username}}: </p>
-    <ul>
+  </div>
+    <div class="justify-content-center mx-auto">
       {% for circle in circles %}
-        <p>Check in: {{ circle.id}}</p>
-        <p>{{ request.user.username}} checked in on {{circle.dateTime}} </p>
-        <p> Hard Today: {{ circle.hardToday }}</p>
-        <p> Good Today: {{ circle.goodToday }}</p>
-        <p> Excited Today: {{ circle.excitedToday }}</p>
-        <p> Safe Thoughts: {{ circle.thoughts}} &nbsp &nbsp &nbsp Explanation: {{ circle.thoughtsExplained }}</p>
-        <p> Safe Actions: {{ circle.actions}} &nbsp &nbsp &nbsp Explanation: {{ circle.actionsExplained }}</p>
-        <p> Mood: {{ circle.moodRange }} &nbsp &nbsp &nbsp Pinta Picture: {{ circle.pintaRange }}</p>
-        <p> Urgency: {{ circle.urgency}}</p>
+        <div class="card bg-light border-dark">
+          {% if circle.actions == 2 or circle.thoughts == 2 %}
+            <div class="card-header bg-danger">
+          {% else %}
+            <div class="card-header">
+          {% endif %}
+
+            <h5 class="card-title">{{circle.dateTime}} by {{ request.user.username}}</h5>
+          </div>
+            <div class ="card-body">
+              <div class="row">
+                {% if circle.moodRange > 6 %}
+                  <p class="card-text col"> Mood: <span class="text-success">Happy ({{ circle.moodRange }})</span></p>
+                {% elif circle.moodRange > 3 %}
+                  <p class="card-text col"> Mood: <span class="card-text">Average ({{ circle.moodRange }})</span></p>
+                {% else %}
+                  <p class="card-text col"> Mood: <span class="text-danger">Sad and Low ({{ circle.moodRange }})</span></p>
+                {% endif %}
+                {% if circle.pintaRange > 8 %}
+                    <p class="card-text col mb-3">Pinta Picture: <span class="text-info">Send Immediately! ({{ circle.pintaRange }})</p>
+                {% elif circle.pintaRange > 5 %}
+                        <p class="card-text col mb-3">Pinta Picture: <span class="text-info">Yes, please! ({{ circle.pintaRange }})</p>
+                {% else %}
+                    <p class="card-text col mb-3">Pinta Picture: <span class="card-text">I'm OK ({{ circle.pintaRange }})</p>
+                {% endif %}
+              </div>
+              <p class="card-text"> Hard Today: {{ circle.hardToday }}</p>
+              <p class="card-text"> Good Today: {{ circle.goodToday }}</p>
+              <p class="card-text"> Excited Today: {{ circle.excitedToday }}</p>
+              <div class="row">
+                <p class="card-text col-sm">Safe Thoughts:
+                  {% if circle.thoughts == 1 %}
+                      Yes
+                  {% elif circle.thoughts == 2 %}
+                      No
+                  {% else %}
+                      Maybe
+                  {% endif %}
+                </p>
+                <p class="card-text col-sm mb-3">Explanation: {{ circle.thoughtsExplained }}</p>
+              </div>
+              <div class="row">
+                <p class="card-text col-sm"> Safe Actions:
+                  {% if circle.actions == 1 %}
+                      Yes
+                  {% elif circle.actions == 2 %}
+                      No
+                  {% else %}
+                      Maybe
+                  {% endif %}
+                </p>
+                <p class="card-text col-sm mb-3">Explanation: {{ circle.actionsExplained }}</p>
+              </div>
+            </div>
+            <div class="card-footer text-center">
+                {% if circle.urgency == 1 %}
+                    <p class="card-text text-success">Call now</p>
+                {% elif circle.urgency == 2 %}
+                    <p class="card-text text-success">Text now</p>
+                {% elif circle.urgency == 3 %}
+                    <p class="card-text text-primary">Talk later</p>
+                {% elif circle.urgency == 4 %}
+                    <p class="card-text text-muted">Not necessary to talk about it</p>
+                {% elif circle.urgency == 5 %}
+                    <p class="card-text text-muted">I prefer not to talk about it</p>
+                {% endif %}
+            </div>
+          </div>
         </br>
         </br>
       {% empty %}
-        <li>You checked in.</li>
+        <div>You do not have any check-ins.</div>
       {% endfor %}
-    </ul>
-  </div>
+    </div>
 
 {% endblock content %}

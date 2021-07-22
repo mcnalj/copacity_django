@@ -25,17 +25,17 @@ class CheckInForm(forms.ModelForm):
 
         fields = ['hardToday', 'goodToday', 'excitedToday', 'thoughts', 'thoughtsExplained', 'actions', 'actionsExplained', 'moodRange', 'pintaRange', 'urgency', 'visibility']
         widgets = {
-                    'hardToday': forms.TextInput(attrs={'class': 'col-sm-8 form-control'}),
-                    'goodToday': forms.TextInput(attrs={'class': 'col-sm-8 form-control'}),
-                    'excitedToday': forms.TextInput(attrs={'class': 'col-sm-8 form-control'}),
+                    'hardToday': forms.TextInput(attrs={'class': 'form-control col-sm-8'}),
+                    'goodToday': forms.TextInput(attrs={'class': 'form-control col-sm-8'}),
+                    'excitedToday': forms.TextInput(attrs={'class': 'form-control col-sm-8'}),
                     'thoughts': forms.RadioSelect(attrs={'class': 'form-check-input'}),
-                    'thoughtsExplained': forms.TextInput(attrs={'class': 'col-sm-8 form-control', 'placeholder': 'optional explanation'}),
+                    'thoughtsExplained': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'optional explanation'}),
                     'actions': forms.RadioSelect(attrs={'class': 'form-check-input'}),
-                    'actionsExplained': forms.TextInput(attrs={'class': 'col-sm-8 form-control', 'placeholder': 'optional explanation'}),
-                    'moodRange': forms.NumberInput(attrs={'type': 'range', 'class': "col-sm-4 form-range", 'min': 1, 'max': 10, 'value': 5}),
-                    'pintaRange': forms.NumberInput(attrs={'type': 'range', 'class': "col-sm-4 form-range", 'min': 1, 'max': 10, 'value': 5}),
+                    'actionsExplained': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'optional explanation'}),
+                    'moodRange': forms.NumberInput(attrs={'type': 'range', 'class': "form-range col-sm-4", 'min': 1, 'max': 10, 'value': 5}),
+                    'pintaRange': forms.NumberInput(attrs={'type': 'range', 'class': " form-range col-sm-4", 'min': 1, 'max': 10, 'value': 5}),
                     'urgency': forms.RadioSelect(attrs={'class': 'form-check-input'}),
-                    'visibility': forms.CheckboxSelectMultiple(attrs={'class': 'form-check_input'}),
+                    'visibility': forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
         }
 
 class CreateCircleForm(forms.ModelForm):
