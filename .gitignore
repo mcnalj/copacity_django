@@ -2,3 +2,4 @@ co-pacity/
 __pycache__/
 *.sqlite3
 .DS_Store
+copacity_app/credentials.py
